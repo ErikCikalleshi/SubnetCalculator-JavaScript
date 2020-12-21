@@ -1,0 +1,149 @@
+body, html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+.head-banner {
+    background-image: url(https://i.redd.it/52f61nfzmwl51.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.info-box{
+    background-color: #ffcb6b;
+}
+
+#frstContainer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow:  5px 6px 4px #e5e5e5;
+}
+.info-box > div{
+    margin-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.info-box > h3{
+    margin-left: 10px;
+}
+.box{
+    padding-left: 10px;
+    padding-top: 5px;
+    border: solid black 2px;
+}
+#navbar{
+    height: 50px;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    width: 100%;
+}
+
+.tac{
+    position: center;
+}
+
+h1.title {
+    font-size: 5rem;
+    height: 600px;
+    line-height: 600px;
+    text-align: center;
+    vertical-align: center;
+    text-shadow: 0 5px 15px black;
+}
+
+.btn-secondary {
+    margin: 5px 0;
+    background-color: gray;
+}
+
+.empty{
+    height: 50px;
+}
+table{
+    table-layout: fixed;
+    width: 1000px;
+    vertical-align: middle;
+}
+td,tr {
+    margin: 5px;
+    padding: 2.5px;
+
+}
+.arrow-down{
+    height: 900px;
+    line-height: 900px;
+    text-align: center;
+    vertical-align: center;
+}
+#second.arrow-down::after{
+    content: "";
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 700px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-right: 4px solid yellow;
+    border-bottom: 4px solid yellow;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-animation: 3s arrow infinite ease;
+    animation: 3s arrow infinite ease;
+}
+.arrow-down::after{
+    content: "";
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 750px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-right: 4px solid yellow;
+    border-bottom: 4px solid yellow;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-animation: 3s arrow infinite ease;
+    animation: 3s arrow infinite ease;
+}
+
+@-webkit-keyframes arrow {
+    0%, 100%{
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+@keyframes arrow {
+    0%, 100%{
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+
+.custom-select {
+    width: 400px;
+}
+
+.mb-3#result {
+    width: auto;
+}
+
+.mb-3#bitmap {
+    width: auto;
+}
+#bitmap:disabled {
+    background-color: red;
+}

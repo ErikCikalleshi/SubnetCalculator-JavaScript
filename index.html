@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Subnet Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="logic.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light light" id="navbar">
+    <a class="navbar-brand" href="#">
+        <img src="https://static.thenounproject.com/png/901844-200.png"
+             width="40" height="40" alt="">
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="#fat">Subnet-Calculator</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#mdo">Theorie</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+<header class="head-banner text-white text-center">
+    <div class="bannerText">
+        <h1 class="title">Welcome to the Subnet-Calculator</h1>
+    </div>
+
+    <div class="arrow-down"></div>
+    <div class="arrow-down" id="second"></div>
+
+</header>
+<div class="headContainer" id="fat">
+    <div class="empty"></div>
+    <div class="container" id="frstContainer">
+        <h1>Network</h1>
+        <table>
+            <tr>
+                <td>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off"> A
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> B
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> C
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-IPAddress">IP Address</span>
+                        </div>
+                        <input type="text" class="form-control" id="ipBtn" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Subnet Mask</label>
+                        </div>
+                        <select class="custom-select" id="subnetMask">
+
+                        </select>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="subnetBits">Subnet Bits</label>
+                        </div>
+                        <select class="custom-select" id="subnetBits">
+
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="maskBits">Mask Bits</label>
+                        </div>
+                        <select class="custom-select" id="maskBits">
+
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="hostPer">Host Per Subnet</label>
+                        </div>
+                        <select class="custom-select" id="hostPer">
+
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="maxSubnets">Maximum Subnets</label>
+                        </div>
+                        <select class="custom-select" id="maxSubnets">
+
+                        </select>
+                    </div>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="input-group mb-3" id="result">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-HostRange">Host Address Range</span>
+                        </div>
+                        <input type="text" class="form-control" id="hostRange" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-SubnetID">Subnet ID</span>
+                        </div>
+                        <input type="text" class="form-control" id="subnetID" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-Broadcast">Broadcast-Address</span>
+                        </div>
+                        <input type="text" class="form-control" id="broadCast" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-WildcardMask">Wildcard Mask</span>
+                        </div>
+                        <input type="text" class="form-control" id="wildCardMask" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-HexIP">Hex IP Address</span>
+                        </div>
+                        <input type="text" class="form-control" id="hexIP" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-FirstOctetRange">First Octet Range</span>
+                        </div>
+                        <input type="text" class="form-control" id="octetRange" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-CIDR">CIDR</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" id="cidr" disabled>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-SubnetBitmap">Subnet Bitmap</span>
+                        </div>
+                        <input value="" type="text" class="form-control" id="bit" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-Binary">Binary subnet mask</span>
+                        </div>
+                        <input value="" type="text" class="form-control" id="binarySubnet" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-IP">Binary IP address</span>
+                        </div>
+                        <input value="" type="text" class="form-control" id="binaryIP" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="info-box">
+            <div> <h3><img src="https://i.pinimg.com/474x/58/7c/3f/587c3f037dafe513d20c8d817a0f534c.jpg" alt="" width="40" height="40"> Hinweis</h3>
+                <p>
+                <strong>Subnetzadresse</strong> - Sie lassen sich einsetzen, um Netzwerke zu strukturieren, zu segmentieren oder Adressräume einzusparen.
+                    <br>
+                <strong>Subnetz-Broadcast-Adresse</strong> - Wenn wir ein Paket an diese Adresse senden, wird es an alle Hosts innerhalb des Subnetzwerks gesendet.
+                    <br>
+                <strong>Hosts-Range</strong> - Bereich der gültigen IP-Adressen.
+                    <br>
+                <strong>Subnetz-Bitmap</strong> -
+                N - Netzwerkbits,
+                S - Subnetzbits,
+                H - Hostbits.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="theoryContainer" id="mdo">
+    <div class="container" id="sndContainer">
+        <div class="empty"></div>
+        <div class="rhs-cont">
+            <h1 class="hTag2"><span>Einführung in IP Subnetting</span></h1>
+            <p><b>Subnetting</b> wird dazu verwendet, um große aber auch kleinere pyhsische Netzwerke in logische
+                Teilnetze zu unterteilen. Aber von außen hin, wird das Netz nur als ein ganzes großes wahrgenommen.
+                Durch die rapide Entwicklung des Internets werden die IP-Adressen immer knapper. Das <b>Subnetting</b>
+                löst dieses Problem.</p>
+            <h3>Gründe für Subnetting</h3>
+            <p>Trennen:</p>
+            <ul>
+                <li>von Netzwerken unterschiedlicher Topologie</li>
+                <li>von Netzwerken nach Standorten, Gebäuden und Etagen</li>
+                <li>von Netzwerken nach Abteilungen und Bereichen</li>
+                <li>von sensitiven Bereichen vom Hauptnetze</li>
+                <li>des Netzwerks in logische Arbeitsgruppen</li>
+                <li>des Netzwerks zur Reduzierung des Verkehrsaufkommens</li>
+            </ul>
+            <h3>Vorteile von Subnetting</h3>
+            <ul>
+                <li>Größeres Netz in kleine Subnetze unterteilen</li>
+                <li>Flexibilität bei der Adressierung für den Administrator</li>
+                <li>Broadcast-Unterteilung</li>
+                <li>Höhere Sicherheit des LANs.</li>
+                <li>Ungenutzte IP-Adressen können vermietet oder verkauft werden</li>
+                <li>Performance und Übersicht allgemein im Netzwerk erhöhen</li>
+            </ul>
+            <h2>Aufbau IP-Adresse</h2>
+            <p>Das "Internet Protocol" (IPv4) Adresse besteht aus <b>32-Bit</b> sprich <b>4</b> Byte. Diese IP-Adresse
+                wird den Geräten oder Hosts in einem Netzwerk zugewiesen. Um eine bessere Übersicht zu haben werden die
+                Adressen meist in <b>4 Blöcken/ 8-Bit</b> dargestellt.</p>
+            <p>Jede IP-Adresse besteht aus zwei Teile, die durch eine <b>Netzmaske</b> (Network-ID) -und einen <b>Hostteil</b>
+                (Host ID) getrennt wird. Die von der Netzmaske maskierten Bits (Netzwerkteil) sind bei allen Hosts eines
+                Netzes gleich.</p>
+            <p>Zum Beispiel:</p>
+            <div class="tac"><img title="IP Subnetting Tool"
+                                  src="https://www.manageengine.com/products/oputils/images/ip-address-representation.jpg"
+                                  alt="IP Subnetting - ManageEngine OpUtils" name="IP Subnet Address"></div>
+            <h2>Netzwerk IP Klasse</h2>
+            <p>Für eine bessere Unterteilung von Netzen werden die IP-Adressen in Klassen eingeteilt. Diese Klassen
+                werden als Klasse A, B, C, D und E bezeichnet. Netzwerke der Klasse A können Millionen von Geräten
+                verbinden. Netzwerke der Klasse B und C werden kleiner und kleiner. (Netzwerke der Klasse D und Klasse E
+                werden selten verwendet.). Die Klasse D wird für die Multicasts verwendet und die Klasse E wird für für
+                zukünftige Zwecke reserviert.</p>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td align="center"><strong>Class</strong></td>
+                    <td align="center"><strong>IP Range</strong></td>
+                    <td align="center"><strong>Bits Pattern of First Byte</strong></td>
+                    <td align="center"><strong>Network ID (N) and Host ID (H) allocation</strong></td>
+                    <td align="center"><strong>Number of Hosts</strong></td>
+                </tr>
+                <tr>
+                    <td align="center">A</td>
+                    <td align="center">1-127</td>
+                    <td align="center">0xxxxxxx</td>
+
+                    <td align="center">N.H.H.H</td>
+                    <td align="right">16,777,214</td>
+                </tr>
+                <tr>
+                    <td align="center">B</td>
+                    <td align="center">128-191</td>
+                    <td align="center">10xxxxxx</td>
+                    <td align="center">N.N.H.H</td>
+                    <td align="right">65,534</td>
+                </tr>
+                <tr>
+                    <td align="center">C</td>
+                    <td align="center">192-223</td>
+                    <td align="center">110xxxxx</td>
+                    <td align="center">N.N.N.H</td>
+                    <td align="right">254</td>
+                </tr>
+                <tr>
+                    <td align="center">D</td>
+                    <td align="center">224-239</td>
+                    <td align="center">1110xxxx</td>
+                    <td align="center">-</td>
+                    <td align="right">-</td>
+                </tr>
+                <tr>
+                    <td align="center">E</td>
+                    <td align="center">240-255</td>
+                    <td align="center">11110xxx</td>
+                    <td align="center">-</td>
+                    <td align="right">-</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>*Jede IP address die mit 127 startet ist eine <strong>Loop back IP</strong> Adresse.</p>
+            <h2>Was ist eine Subnetmaske?</h2>
+            <p>Eine Subnetzmaske ist ähnlich wie eine IP-Adresse, jedoch wird es nur im privaten Netzwerk verwendet. Zum
+                Beispiel verwender ein Router diese Subnetzmaske, um die Datenpakete an der richtigen Stelle zu leiten.
+                Subnetzmasken werden in Datenpaketen, die das Internet durchqueren, nicht angegeben.</p>
+            <p>Für ein Beispiel aus der realen Welt nehmen wir an, dass ein IP-Paket an die IP-Adresse 192.0.2.15
+                adressiert ist. Bei dieser IP-Adresse handelt es sich um ein Netzwerk der Klasse C, daher wird das
+                Netzwerk durch „192.0.2“ (oder, um technisch präzise zu sein, 192.0.2.0/24) identifiziert.
+                Netzwerk-Router leiten das Paket an einen Host in dem mit „192.0.2“ bezeichneten Netzwerk weiter</p>
+            <h2>Berechnungen</h2>
+            <h3>Netzwerkadresse berechnen</h3>
+            <p>Um die Netzwerkadresse (Netz-Subnet-ID) zu berechnen, muss die IP-Adresse und die Subnetzmaske in Binär
+                umgerechnet werden. Dann wird die Bitweise-Und-Operation angewendet:</p>
+            <p>Zum Beispiel haben wir die IP-Adresse <strong>192.168.0.15</strong> und die Subnetmaske ist <strong>255.255.255.192</strong>
+            </p>
+            <div class="box">
+                <p>11000000.10101000.00000000.00001111 AND</p>
+                <u>11111111.11111111.11111111.11000000</u>
+                <p>11000000.10101000.00000000.00000000</p>
+            </div>
+            <p>Die Netzwerkadresse für das Subnet ist <strong>192.168.0.0</strong>. Diese Adresse ist die erste
+                IP-Adresse eines Netzes.</p>
+            <h3>Ersten Host berechnen</h3>
+            <p>Um den ersten Host zu berechnen, nehmen wir die vorhin ausgerechnete Netzwerkadresse und setzen das
+                letzte Host-Bit auf 1.
+                <br>Wir erhalten folgende IP-Adresse: 11000000.10101000.00000000.00000001 bzw. 192.168.0.1. Dadurch,
+                dass nur das letzte Host-Bit auf 1 steht, handelt es sich um die zweite IP-Adresse im Netz. Die erste
+                IP-Adresse ist ja für die Netzwerkadresse reserviert, die wir vorhin schon ausgerechnet haben.</p>
+            <h3>Letzten Host berechnen</h3>
+            <p>Um den letzten Host zu berechnen, nehmen wir die vorhin ausgerechnete Netzwerkadresse und setzen außer
+                dem letzten Host-Bit alle Host-Bits auf 1. Wir erhalten folgende IP-Adresse:
+                11000000.10101000.00000000.00111110 bzw. 192.168.0.62. Dadurch, dass nur das letzte Host-Bit auf 0
+                steht, handelt es sich um die vorletzte IP-Adresse im Netz. Die letzte IP-Adresse ist für die
+                Broadcastadresse reserviert.</p>
+            <h3>Broadcastadresse berechnen</h3>
+            <p>Um den Broadcast zu berechnen, nehmen wir die vorhin ausgerechnete Netzwerkadresse und setzen alle
+                Host-Bits auf 1. Wir erhalten folgende IP-Adresse 11000000.10101000.00000000.00111111 bzw. 192.168.0.63
+                (Netz-ID: 11000000.10101000.00000000.00000000). Dadurch, dass alle Host-Bits auf 1 gesetzt sind, handelt
+                es sich um die letzte IP-Adresse des Netzes. Das nächste Subnetz würde in unserem Beispiel dann mit der
+                Netzwerkadresse 192.168.0.64 beginnen und so weiter.</p>
+            <h3>Weitere Infos berechnen</h3>
+            <h4>Anzahl an Netzen berechnen</h4>
+            <p>Max Subnets = 2<sup>Netzbits</sup> = 2<sup>24 (Bei Klasse C)</sup> = 16.777.216</p>
+            <h4>Anzahl an IP-Adressen pro Netz berechnen</h4>
+            <p>Max Hosts = 2<sup>Hostbits</sup> = 2<sup>(32 - 24 (Bei Klasse C))</sup> = 2<sup>8</sup> = 256</p>
+            <h4>Anzahl an Host pro Netz berechnen</h4>
+            <p>Max Hosts/Subnet = 2<sup>8 (Bei Klasse C)</sup> - 2 = 254</p>
+        </div>
+        <div class="empty"></div>
+    </div>
+</div>
+<script>
+    document.getElementById("option1").addEventListener("click", function () {
+        load(0, null);
+    });
+    document.getElementById("option2").addEventListener("click", function () {
+        load(1, null);
+    });
+    document.getElementById("option3").addEventListener("click", function () {
+        load(2, null);
+    });
+    document.getElementById("ipBtn").addEventListener("keypress", function (e) {
+        if (e.key === 'Enter') {
+            var options = document.getElementsByName("options");
+            for (var i = 0; i < 5; i++) {
+                if (options[i].checked) {
+                    load(i, "Enter");
+                }
+            }
+        }
+    });
+    document.getElementById("subnetMask").addEventListener("change", function () {
+        changeSettings("subnetMask");
+
+    });
+    document.getElementById("hostPer").addEventListener(("change"), function () {
+        changeSettings("hostPer");
+    });
+    document.getElementById("maxSubnets").addEventListener(("change"), function () {
+        changeSettings("maxSubnets");
+    });
+    document.getElementById("subnetBits").addEventListener(("change"), function () {
+        changeSettings("subnetBits");
+    });
+    document.getElementById("maskBits").addEventListener(("change"), function () {
+        changeSettings("maskBits");
+    });
+
+    document.getElementById('second').addEventListener("click", function () {
+        window.scroll(100, window.innerHeight);
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+        crossorigin="anonymous"></script>
+</body>
+</html>

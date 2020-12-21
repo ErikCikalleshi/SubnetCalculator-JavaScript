@@ -1,0 +1,363 @@
+<html>
+<head>
+<title>logic.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #c792ea; font-style: italic;}
+.s1 { color: #eeffff;}
+.s2 { color: #89ddff;}
+.s3 { color: #c3e88d;}
+.s4 { color: #f78c6c;}
+.s5 { color: #616161; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#212121">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+logic.js</font>
+</center></td></tr></table>
+<pre><span class="s0">var </span><span class="s1">maskOption </span><span class="s2">= [</span><span class="s3">&quot;255.0.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.128.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.192.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.224.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.240.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.248.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.252.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.254.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.0.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.128.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.192.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.224.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.240.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.248.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.252.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.254.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.255.0&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.255.128&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.255.192&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.255.224&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.255.240&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.255.248&quot;</span><span class="s2">, </span><span class="s3">&quot;255.255.255.252&quot;</span><span class="s2">];</span>
+<span class="s0">var </span><span class="s1">subnetBitsOption </span><span class="s2">= [];</span>
+<span class="s0">var </span><span class="s1">maskBitsOption </span><span class="s2">= [];</span>
+<span class="s0">var </span><span class="s1">hostPer </span><span class="s2">= [];</span>
+<span class="s0">var </span><span class="s1">maxSubnetsOption </span><span class="s2">= [];</span>
+<span class="s0">var </span><span class="s1">option </span><span class="s2">= [];</span>
+<span class="s0">var </span><span class="s1">networkClass</span><span class="s2">;</span>
+
+<span class="s0">function </span><span class="s1">selectIf</span><span class="s2">(</span><span class="s1">i</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">select</span><span class="s2">;</span>
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">0</span><span class="s2">) {</span>
+        <span class="s1">select </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetMask&quot;</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">1</span><span class="s2">) {</span>
+        <span class="s1">select </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetBits&quot;</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">2</span><span class="s2">) {</span>
+        <span class="s1">select </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;maskBits&quot;</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">3</span><span class="s2">) {</span>
+        <span class="s1">select </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;hostPer&quot;</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s1">select </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;maxSubnets&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">return </span><span class="s1">select</span><span class="s2">;</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">jValue</span><span class="s2">(</span><span class="s1">type</span><span class="s2">, </span><span class="s1">i</span><span class="s2">) {</span>
+
+    <span class="s0">switch </span><span class="s2">(</span><span class="s1">type</span><span class="s2">) {</span>
+        <span class="s0">case </span><span class="s3">&quot;a&quot;</span><span class="s2">:</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s1">maskOption</span><span class="s2">.</span><span class="s1">length</span><span class="s2">]</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">1</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s1">subnetBitsOption</span><span class="s2">.</span><span class="s1">length</span><span class="s2">];</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">2</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s1">maskBitsOption</span><span class="s2">.</span><span class="s1">length</span><span class="s2">]</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">3</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s1">hostPer</span><span class="s2">.</span><span class="s1">length</span><span class="s2">]</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s1">maxSubnetsOption</span><span class="s2">.</span><span class="s1">length</span><span class="s2">]</span>
+            <span class="s2">}</span>
+        <span class="s0">case </span><span class="s3">&quot;b&quot;</span><span class="s2">:</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">8</span><span class="s2">, </span><span class="s1">maskOption</span><span class="s2">.</span><span class="s1">length</span><span class="s2">]</span>
+
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">1</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s4">15</span><span class="s2">];</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">2</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">8</span><span class="s2">, </span><span class="s4">23</span><span class="s2">];</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">3</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s4">15</span><span class="s2">];</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s4">15</span><span class="s2">];</span>
+            <span class="s2">}</span>
+        <span class="s0">case </span><span class="s3">&quot;c&quot;</span><span class="s2">:</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">16</span><span class="s2">, </span><span class="s1">maskOption</span><span class="s2">.</span><span class="s1">length</span><span class="s2">]</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">1</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s4">7</span><span class="s2">];</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">2</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">16</span><span class="s2">, </span><span class="s4">23</span><span class="s2">];</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">=== </span><span class="s4">3</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s4">7</span><span class="s2">];</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">return </span><span class="s2">[</span><span class="s4">0</span><span class="s2">, </span><span class="s4">7</span><span class="s2">];</span>
+            <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">dropdownLoads</span><span class="s2">(</span><span class="s1">type</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">select</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">allArrays </span><span class="s2">= [</span><span class="s1">maskOption</span><span class="s2">, </span><span class="s1">subnetBitsOption</span><span class="s2">, </span><span class="s1">maskBitsOption</span><span class="s2">, </span><span class="s1">hostPer</span><span class="s2">, </span><span class="s1">maxSubnetsOption</span><span class="s2">];</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">5</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s1">select </span><span class="s2">= </span><span class="s1">selectIf</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+        <span class="s0">var </span><span class="s1">x </span><span class="s2">= </span><span class="s1">jValue</span><span class="s2">(</span><span class="s1">type</span><span class="s2">, </span><span class="s1">i</span><span class="s2">);</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">j </span><span class="s2">= </span><span class="s1">x</span><span class="s2">[</span><span class="s4">0</span><span class="s2">]; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">x</span><span class="s2">[</span><span class="s4">1</span><span class="s2">]; </span><span class="s1">j</span><span class="s2">++) {</span>
+            <span class="s1">option</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">document</span><span class="s2">.</span><span class="s1">createElement</span><span class="s2">(</span><span class="s3">'option'</span><span class="s2">);</span>
+            <span class="s1">option</span><span class="s2">[</span><span class="s1">j</span><span class="s2">].</span><span class="s1">value </span><span class="s2">= </span><span class="s1">j</span><span class="s2">;</span>
+            <span class="s1">option</span><span class="s2">[</span><span class="s1">j</span><span class="s2">].</span><span class="s1">innerHTML </span><span class="s2">= </span><span class="s1">allArrays</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">];</span>
+            <span class="s1">select</span><span class="s2">.</span><span class="s1">appendChild</span><span class="s2">(</span><span class="s1">option</span><span class="s2">[</span><span class="s1">j</span><span class="s2">]);</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">clear</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">select</span><span class="s2">;</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">5</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s1">select </span><span class="s2">= </span><span class="s1">selectIf</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+        <span class="s1">select</span><span class="s2">.</span><span class="s1">innerHTML </span><span class="s2">= </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">decToHex</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">hex </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">split </span><span class="s2">= </span><span class="s1">hex</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">split</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s1">Number</span><span class="s2">(</span><span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]).</span><span class="s1">toString</span><span class="s2">(</span><span class="s4">16</span><span class="s2">).</span><span class="s1">toUpperCase</span><span class="s2">();</span>
+    <span class="s2">}</span>
+    <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;hexIP&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">split</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">wildCardMask</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">x </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetMask&quot;</span><span class="s2">).</span><span class="s1">selectedIndex</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">y </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetMask&quot;</span><span class="s2">).</span><span class="s1">options</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">split </span><span class="s2">= </span><span class="s1">y</span><span class="s2">[</span><span class="s1">x</span><span class="s2">].</span><span class="s1">text</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">4</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s4">255 </span><span class="s2">- </span><span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">];</span>
+    <span class="s2">}</span>
+    <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;wildCardMask&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">split</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">broadCastIP</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">ip </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">split </span><span class="s2">= </span><span class="s1">ip</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s1">split</span><span class="s2">[</span><span class="s1">split</span><span class="s2">.</span><span class="s1">length </span><span class="s2">- </span><span class="s4">1</span><span class="s2">] = </span><span class="s3">&quot;255&quot;</span><span class="s2">;</span>
+    <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;broadCast&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">split</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">subnetID</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">ip </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">split </span><span class="s2">= </span><span class="s1">ip</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s1">split</span><span class="s2">[</span><span class="s1">split</span><span class="s2">.</span><span class="s1">length </span><span class="s2">- </span><span class="s4">1</span><span class="s2">] = </span><span class="s3">&quot;0&quot;</span><span class="s2">;</span>
+    <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetID&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">split</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">hostRange</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">ip </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">split </span><span class="s2">= </span><span class="s1">ip</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s1">split</span><span class="s2">[</span><span class="s1">split</span><span class="s2">.</span><span class="s1">length </span><span class="s2">- </span><span class="s4">1</span><span class="s2">] = </span><span class="s3">&quot;1&quot;</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">part1 </span><span class="s2">= </span><span class="s1">split</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s1">split </span><span class="s2">= </span><span class="s1">ip</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+
+    <span class="s0">var </span><span class="s1">wildCard </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;wildCardMask&quot;</span><span class="s2">).</span><span class="s1">value</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">splitWild </span><span class="s2">= </span><span class="s1">wildCard</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">4</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">splitWild</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] &gt; </span><span class="s4">0 </span><span class="s2">&amp;&amp; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">3</span><span class="s2">) {</span>
+            <span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s1">splitWild</span><span class="s2">[</span><span class="s1">i</span><span class="s2">];</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">&gt;= </span><span class="s4">3</span><span class="s2">) {</span>
+            <span class="s0">var </span><span class="s1">temp </span><span class="s2">= </span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">splitWild</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]) - </span><span class="s4">1</span><span class="s2">;</span>
+            <span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s1">temp</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+    <span class="s0">var </span><span class="s1">part2 </span><span class="s2">= </span><span class="s1">split</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;hostRange&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">part1 </span><span class="s2">+ </span><span class="s3">&quot; - &quot; </span><span class="s2">+ </span><span class="s1">part2</span><span class="s2">;</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">checkIP</span><span class="s2">(</span><span class="s1">type</span><span class="s2">, </span><span class="s1">key</span><span class="s2">) {</span>
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">key </span><span class="s2">=== </span><span class="s0">null</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">type </span><span class="s2">=== </span><span class="s4">0</span><span class="s2">) {</span>
+            <span class="s0">return </span><span class="s3">&quot;10.0.0.1&quot;</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">type </span><span class="s2">=== </span><span class="s4">1</span><span class="s2">) {</span>
+            <span class="s0">return </span><span class="s3">&quot;172.16.0.1&quot;</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">type </span><span class="s2">=== </span><span class="s4">2</span><span class="s2">) {</span>
+            <span class="s0">return </span><span class="s3">&quot;192.168.0.1&quot;</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s0">var </span><span class="s1">array </span><span class="s2">= [</span><span class="s3">&quot;1&quot;</span><span class="s2">, </span><span class="s3">&quot;127&quot;</span><span class="s2">, </span><span class="s3">&quot;128&quot;</span><span class="s2">, </span><span class="s3">&quot;191&quot;</span><span class="s2">, </span><span class="s3">&quot;192&quot;</span><span class="s2">, </span><span class="s3">&quot;223&quot;</span><span class="s2">];</span>
+        <span class="s0">var </span><span class="s1">ip </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value</span><span class="s2">;</span>
+        <span class="s0">var </span><span class="s1">split </span><span class="s2">= </span><span class="s1">ip</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+        <span class="s0">var </span><span class="s1">temp</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">3</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">type </span><span class="s2">=== </span><span class="s1">i</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">split</span><span class="s2">[</span><span class="s4">0</span><span class="s2">] &lt; </span><span class="s1">array</span><span class="s2">[</span><span class="s1">i </span><span class="s2">* </span><span class="s4">2</span><span class="s2">]) {</span>
+                    <span class="s1">temp </span><span class="s2">= </span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">split</span><span class="s2">[</span><span class="s4">0</span><span class="s2">], </span><span class="s4">10</span><span class="s2">) + </span><span class="s4">1</span><span class="s2">;</span>
+                    <span class="s1">split</span><span class="s2">[</span><span class="s4">0</span><span class="s2">] = </span><span class="s1">temp</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">();</span>
+
+                <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">split</span><span class="s2">[</span><span class="s4">0</span><span class="s2">] &gt; </span><span class="s1">array</span><span class="s2">[(</span><span class="s1">i </span><span class="s2">* </span><span class="s4">2</span><span class="s2">) + </span><span class="s4">1</span><span class="s2">]) {</span>
+                    <span class="s1">temp </span><span class="s2">= </span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">split</span><span class="s2">[</span><span class="s4">0</span><span class="s2">], </span><span class="s4">10</span><span class="s2">) - </span><span class="s4">1</span><span class="s2">;</span>
+                    <span class="s1">split</span><span class="s2">[</span><span class="s4">0</span><span class="s2">] = </span><span class="s1">temp</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">();</span>
+                <span class="s2">}</span>
+                <span class="s0">return </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">split</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">toBinary</span><span class="s2">(</span><span class="s1">split </span><span class="s2">, </span><span class="s1">len</span><span class="s2">) {</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">len</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s1">Number</span><span class="s2">(</span><span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]).</span><span class="s1">toString</span><span class="s2">(</span><span class="s4">2</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">return </span><span class="s1">split</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">cidr</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">x </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetMask&quot;</span><span class="s2">).</span><span class="s1">selectedIndex</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">y </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetMask&quot;</span><span class="s2">).</span><span class="s1">options</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">split </span><span class="s2">= </span><span class="s1">y</span><span class="s2">[</span><span class="s1">x</span><span class="s2">].</span><span class="s1">text</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s1">split </span><span class="s2">= </span><span class="s1">toBinary</span><span class="s2">(</span><span class="s1">split</span><span class="s2">, </span><span class="s4">4</span><span class="s2">);</span>
+    <span class="s0">var </span><span class="s1">temp</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">counter </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">4</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">j </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s4">8</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+            <span class="s1">temp </span><span class="s2">= </span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]) % </span><span class="s4">10</span><span class="s2">;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">temp </span><span class="s2">=== </span><span class="s4">1</span><span class="s2">){</span>
+                <span class="s1">counter</span><span class="s2">++;</span>
+            <span class="s2">}</span>
+            <span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] /= </span><span class="s4">10</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;cidr&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">+ </span><span class="s3">&quot;/&quot; </span><span class="s2">+ </span><span class="s1">counter</span><span class="s2">;</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">changeSettings</span><span class="s2">(</span><span class="s1">type</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">x </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s1">type</span><span class="s2">).</span><span class="s1">selectedIndex</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">y </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s1">type</span><span class="s2">).</span><span class="s1">options</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">i</span><span class="s2">;</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">y</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">y</span><span class="s2">[</span><span class="s1">x</span><span class="s2">].</span><span class="s1">text </span><span class="s2">=== </span><span class="s1">y</span><span class="s2">[</span><span class="s1">i</span><span class="s2">].</span><span class="s1">text</span><span class="s2">) {</span>
+            <span class="s0">break</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">j </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s4">5</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+        <span class="s0">var </span><span class="s1">x </span><span class="s2">= </span><span class="s1">selectIf</span><span class="s2">(</span><span class="s1">j</span><span class="s2">);</span>
+        <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s1">x</span><span class="s2">.</span><span class="s1">id</span><span class="s2">).</span><span class="s1">selectedIndex </span><span class="s2">= </span><span class="s1">i</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s1">wildCardMask</span><span class="s2">();</span>
+    <span class="s1">hostRange</span><span class="s2">();</span>
+    <span class="s1">cidr</span><span class="s2">();</span>
+    <span class="s1">bitmap</span><span class="s2">();</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">bitmap</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">type </span><span class="s2">= </span><span class="s1">networkClass</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">x </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetMask&quot;</span><span class="s2">).</span><span class="s1">selectedIndex</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">y </span><span class="s2">= </span><span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;subnetMask&quot;</span><span class="s2">).</span><span class="s1">options</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">split </span><span class="s2">= </span><span class="s1">y</span><span class="s2">[</span><span class="s1">x</span><span class="s2">].</span><span class="s1">text</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">);</span>
+    <span class="s0">var </span><span class="s1">bits </span><span class="s2">= [];</span>
+    <span class="s0">switch </span><span class="s2">(</span><span class="s1">type</span><span class="s2">) {</span>
+        <span class="s0">case </span><span class="s4">0</span><span class="s2">:</span>
+            <span class="s1">bits</span><span class="s2">[</span><span class="s4">0</span><span class="s2">] = </span><span class="s3">&quot;0&quot;</span><span class="s2">;</span>
+        <span class="s0">break</span><span class="s2">;</span>
+        <span class="s0">case </span><span class="s4">1</span><span class="s2">:</span>
+            <span class="s1">bits</span><span class="s2">[</span><span class="s4">0</span><span class="s2">] = </span><span class="s3">&quot;1&quot;</span><span class="s2">;</span>
+            <span class="s1">bits</span><span class="s2">[</span><span class="s4">1</span><span class="s2">] = </span><span class="s3">&quot;0&quot;</span><span class="s2">;</span>
+        <span class="s0">break</span><span class="s2">;</span>
+        <span class="s0">case </span><span class="s4">2</span><span class="s2">:</span>
+            <span class="s1">bits</span><span class="s2">[</span><span class="s4">0</span><span class="s2">] = </span><span class="s3">&quot;1&quot;</span><span class="s2">;</span>
+            <span class="s1">bits</span><span class="s2">[</span><span class="s4">1</span><span class="s2">] = </span><span class="s3">&quot;1&quot;</span><span class="s2">;</span>
+            <span class="s1">bits</span><span class="s2">[</span><span class="s4">2</span><span class="s2">] = </span><span class="s3">&quot;0&quot;</span><span class="s2">;</span>
+        <span class="s0">break</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;bit&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s1">bits</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">8 </span><span class="s2">* (</span><span class="s1">type</span><span class="s2">+</span><span class="s4">1</span><span class="s2">); </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s1">bits</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s3">&quot;n&quot;</span><span class="s2">;</span>
+        <span class="s0">if</span><span class="s2">((</span><span class="s1">i</span><span class="s2">+</span><span class="s4">1</span><span class="s2">) % </span><span class="s4">8 </span><span class="s2">=== </span><span class="s4">0</span><span class="s2">){</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;bit&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">+= </span><span class="s1">bits</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">) + </span><span class="s3">&quot;.&quot;</span><span class="s2">;</span>
+            <span class="s1">bits</span><span class="s2">.</span><span class="s1">splice</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s1">bits</span><span class="s2">.</span><span class="s1">length</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;bit&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">+= </span><span class="s1">bits</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+    <span class="s1">split</span><span class="s2">.</span><span class="s1">splice</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s1">type </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">);</span>
+    <span class="s0">var </span><span class="s1">len </span><span class="s2">= </span><span class="s4">4 </span><span class="s2">- (</span><span class="s1">type</span><span class="s2">+</span><span class="s4">1</span><span class="s2">);</span>
+    <span class="s1">split </span><span class="s2">= </span><span class="s1">toBinary</span><span class="s2">(</span><span class="s1">split</span><span class="s2">, </span><span class="s1">len</span><span class="s2">);</span>
+    <span class="s0">var </span><span class="s1">dBits </span><span class="s2">= [];</span>
+    <span class="s0">var </span><span class="s1">temp</span><span class="s2">;</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s4">3</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">j </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s4">8</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+            <span class="s1">temp </span><span class="s2">= </span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]) % </span><span class="s4">10</span><span class="s2">;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">temp </span><span class="s2">=== </span><span class="s4">1</span><span class="s2">){</span>
+                <span class="s1">dBits</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] = </span><span class="s3">&quot;s&quot;</span><span class="s2">;</span>
+            <span class="s2">}</span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">dBits</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] = </span><span class="s3">&quot;h&quot;</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">j</span><span class="s2">+</span><span class="s4">1 </span><span class="s2">=== </span><span class="s4">8</span><span class="s2">){</span>
+                <span class="s1">dBits</span><span class="s2">.</span><span class="s1">reverse</span><span class="s2">();</span>
+                <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;bit&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">+= </span><span class="s1">dBits</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">) + </span><span class="s3">&quot;.&quot;</span><span class="s2">;</span>
+                <span class="s1">dBits</span><span class="s2">.</span><span class="s1">splice</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s1">dBits</span><span class="s2">.</span><span class="s1">length</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s1">split</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] /= </span><span class="s4">10</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">load</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">key</span><span class="s2">) {</span>
+    <span class="s5">//var i = [];</span>
+    <span class="s1">networkClass </span><span class="s2">= </span><span class="s1">t</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">j </span><span class="s2">= </span><span class="s4">24</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&gt; </span><span class="s4">1</span><span class="s2">; </span><span class="s1">j</span><span class="s2">--) {</span>
+        <span class="s1">hostPer</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">pow</span><span class="s2">(</span><span class="s4">2</span><span class="s2">, </span><span class="s1">j</span><span class="s2">) - </span><span class="s4">2</span><span class="s2">;</span>
+        <span class="s1">i</span><span class="s2">++;</span>
+    <span class="s2">}</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">j </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s4">23</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+        <span class="s1">maxSubnetsOption</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">pow</span><span class="s2">(</span><span class="s4">2</span><span class="s2">, </span><span class="s1">j</span><span class="s2">);</span>
+        <span class="s1">subnetBitsOption</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">j</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">j </span><span class="s2">= </span><span class="s4">8</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s4">31</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+        <span class="s1">maskBitsOption</span><span class="s2">[</span><span class="s1">j </span><span class="s2">- </span><span class="s4">8</span><span class="s2">] = </span><span class="s1">j</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">j </span><span class="s2">= </span><span class="s4">2</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s4">25</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">clear</span><span class="s2">();</span>
+    <span class="s0">switch </span><span class="s2">(</span><span class="s1">t</span><span class="s2">) {</span>
+        <span class="s0">case </span><span class="s4">0</span><span class="s2">:</span>
+
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">checkIP</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">key</span><span class="s2">);</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;octetRange&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s3">&quot;1 - 126&quot;</span><span class="s2">;</span>
+            <span class="s5">/*for (var j = 0; j &lt; 5; j++) { 
+                i[j] = 0; 
+            }*/</span>
+            <span class="s1">dropdownLoads</span><span class="s2">(</span><span class="s3">&quot;a&quot;</span><span class="s2">);</span>
+            <span class="s0">break</span><span class="s2">;</span>
+        <span class="s0">case </span><span class="s4">1</span><span class="s2">:</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">checkIP</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">key</span><span class="s2">);</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;octetRange&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s3">&quot;128 - 191&quot;</span><span class="s2">;</span>
+
+            <span class="s1">dropdownLoads</span><span class="s2">(</span><span class="s3">&quot;b&quot;</span><span class="s2">);</span>
+            <span class="s0">break</span><span class="s2">;</span>
+        <span class="s0">case </span><span class="s4">2</span><span class="s2">:</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">checkIP</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">key</span><span class="s2">);</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;octetRange&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s3">&quot;192 - 223&quot;</span><span class="s2">;</span>
+            <span class="s1">dropdownLoads</span><span class="s2">(</span><span class="s3">&quot;c&quot;</span><span class="s2">);</span>
+            <span class="s0">break</span><span class="s2">;</span>
+        <span class="s0">case </span><span class="s4">3</span><span class="s2">:</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s1">checkIP</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">key</span><span class="s2">);</span>
+            <span class="s5">//i[0] = 24;</span>
+            <span class="s0">break</span><span class="s2">;</span>
+        <span class="s0">case </span><span class="s4">4</span><span class="s2">:</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s3">&quot;172.16.0.1&quot;</span><span class="s2">;</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+            <span class="s0">break</span><span class="s2">;</span>
+        <span class="s0">case </span><span class="s4">5</span><span class="s2">:</span>
+            <span class="s1">document</span><span class="s2">.</span><span class="s1">getElementById</span><span class="s2">(</span><span class="s3">&quot;ipBtn&quot;</span><span class="s2">).</span><span class="s1">value </span><span class="s2">= </span><span class="s3">&quot;172.16.0.1&quot;</span><span class="s2">;</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+            <span class="s0">break</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s1">decToHex</span><span class="s2">();</span>
+    <span class="s1">wildCardMask</span><span class="s2">();</span>
+    <span class="s1">broadCastIP</span><span class="s2">();</span>
+    <span class="s1">subnetID</span><span class="s2">();</span>
+    <span class="s1">hostRange</span><span class="s2">();</span>
+    <span class="s1">cidr</span><span class="s2">();</span>
+    <span class="s1">bitmap</span><span class="s2">();</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>
