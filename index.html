@@ -41,8 +41,11 @@
 <div class="headContainer" id="fat">
     <div class="empty"></div>
     <div class="container" id="frstContainer">
-        <h1>Network</h1>
+
         <table>
+            <tr>
+                <td colspan="2"> <h1>Network</h1></td>
+            </tr>
             <tr>
                 <td>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -56,6 +59,9 @@
                             <input type="radio" name="options" id="option3" autocomplete="off"> C
                         </label>
                     </div>
+                </td>
+                <td>
+                    <h3 id="publicIp" style="color: #82aaff"></h3>
                 </td>
             </tr>
             <tr>
@@ -71,7 +77,7 @@
                 <td>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text">Subnet Mask</label>
+                            <label class="input-group-text" for="subnetMask">Subnet Mask</label>
                         </div>
                         <select class="custom-select" id="subnetMask">
 
@@ -232,18 +238,21 @@
             </tr>
         </table>
         <div class="info-box">
-            <div> <h3><img src="https://i.pinimg.com/474x/58/7c/3f/587c3f037dafe513d20c8d817a0f534c.jpg" alt="" width="40" height="40"> Hinweis</h3>
+            <div><h3><img src="https://i.pinimg.com/474x/58/7c/3f/587c3f037dafe513d20c8d817a0f534c.jpg" alt=""
+                          width="40" height="40"> Hinweis</h3>
                 <p>
-                <strong>Subnetzadresse</strong> - Sie lassen sich einsetzen, um Netzwerke zu strukturieren, zu segmentieren oder Adressräume einzusparen.
+                    <strong>Subnetzadresse</strong> - Sie lassen sich einsetzen, um Netzwerke zu strukturieren, zu
+                    segmentieren oder Adressräume einzusparen.
                     <br>
-                <strong>Subnetz-Broadcast-Adresse</strong> - Wenn wir ein Paket an diese Adresse senden, wird es an alle Hosts innerhalb des Subnetzwerks gesendet.
+                    <strong>Subnetz-Broadcast-Adresse</strong> - Wenn wir ein Paket an diese Adresse senden, wird es an
+                    alle Hosts innerhalb des Subnetzwerks gesendet.
                     <br>
-                <strong>Hosts-Range</strong> - Bereich der gültigen IP-Adressen.
+                    <strong>Hosts-Range</strong> - Bereich der gültigen IP-Adressen.
                     <br>
-                <strong>Subnetz-Bitmap</strong> -
-                N - Netzwerkbits,
-                S - Subnetzbits,
-                H - Hostbits.
+                    <strong>Subnetz-Bitmap</strong> -
+                    N - Netzwerkbits,
+                    S - Subnetzbits,
+                    H - Hostbits.
                 </p>
             </div>
 
@@ -288,7 +297,7 @@
             <p>Zum Beispiel:</p>
             <div class="tac"><img title="IP Subnetting Tool"
                                   src="https://www.manageengine.com/products/oputils/images/ip-address-representation.jpg"
-                                  alt="IP Subnetting - ManageEngine OpUtils" name="IP Subnet Address"></div>
+                                  alt="IP Subnetting - ManageEngine OpUtils"></div>
             <h2>Netzwerk IP Klasse</h2>
             <p>Für eine bessere Unterteilung von Netzen werden die IP-Adressen in Klassen eingeteilt. Diese Klassen
                 werden als Klasse A, B, C, D und E bezeichnet. Netzwerke der Klasse A können Millionen von Geräten
@@ -299,47 +308,46 @@
             <table class="table">
                 <tbody>
                 <tr>
-                    <td align="center"><strong>Class</strong></td>
-                    <td align="center"><strong>IP Range</strong></td>
-                    <td align="center"><strong>Bits Pattern of First Byte</strong></td>
-                    <td align="center"><strong>Network ID (N) and Host ID (H) allocation</strong></td>
-                    <td align="center"><strong>Number of Hosts</strong></td>
+                    <td><strong>Class</strong></td>
+                    <td><strong>IP Range</strong></td>
+                    <td><strong>Bits Pattern of First Byte</strong></td>
+                    <td><strong>Network ID (N) and Host ID (H) allocation</strong></td>
+                    <td><strong>Number of Hosts</strong></td>
                 </tr>
                 <tr>
-                    <td align="center">A</td>
-                    <td align="center">1-127</td>
-                    <td align="center">0xxxxxxx</td>
-
-                    <td align="center">N.H.H.H</td>
-                    <td align="right">16,777,214</td>
+                    <td>A</td>
+                    <td>1-127</td>
+                    <td>0xxxxxxx</td>
+                    <td>N.H.H.H</td>
+                    <td class="right">16,777,214</td>
                 </tr>
                 <tr>
-                    <td align="center">B</td>
-                    <td align="center">128-191</td>
-                    <td align="center">10xxxxxx</td>
-                    <td align="center">N.N.H.H</td>
-                    <td align="right">65,534</td>
+                    <td>B</td>
+                    <td>128-191</td>
+                    <td>10xxxxxx</td>
+                    <td>N.N.H.H</td>
+                    <td class="right">65,534</td>
                 </tr>
                 <tr>
-                    <td align="center">C</td>
-                    <td align="center">192-223</td>
-                    <td align="center">110xxxxx</td>
-                    <td align="center">N.N.N.H</td>
-                    <td align="right">254</td>
+                    <td>C</td>
+                    <td>192-223</td>
+                    <td>110xxxxx</td>
+                    <td>N.N.N.H</td>
+                    <td class="right">254</td>
                 </tr>
                 <tr>
-                    <td align="center">D</td>
-                    <td align="center">224-239</td>
-                    <td align="center">1110xxxx</td>
-                    <td align="center">-</td>
-                    <td align="right">-</td>
+                    <td>D</td>
+                    <td>224-239</td>
+                    <td>1110xxxx</td>
+                    <td>-</td>
+                    <td>-</td>
                 </tr>
                 <tr>
-                    <td align="center">E</td>
-                    <td align="center">240-255</td>
-                    <td align="center">11110xxx</td>
-                    <td align="center">-</td>
-                    <td align="right">-</td>
+                    <td>E</td>
+                    <td>240-255</td>
+                    <td>11110xxx</td>
+                    <td>-</td>
+                    <td class="right">-</td>
                 </tr>
                 </tbody>
             </table>
@@ -434,6 +442,19 @@
     document.getElementById('second').addEventListener("click", function () {
         window.scroll(100, window.innerHeight);
     });
+
+    var radr;
+    document.onreadystatechange = function (){
+        if (document.readyState === 'interactive') {
+            fetch('https://api.ipify.org')
+                .then(response => response.text())
+                .then((response) => {
+                    document.getElementById('publicIp').innerHTML = "Your public IP is : " + response;
+                })
+
+        }
+    }
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

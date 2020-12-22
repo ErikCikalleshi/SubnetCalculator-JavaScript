@@ -13,6 +13,15 @@ body, html {
 .info-box{
     background-color: #ffcb6b;
 }
+.table td{
+    text-align: center;
+}
+.table td.right{
+    text-align: right;
+}
+.headerTable{
+    text-align: center;
+}
 
 #frstContainer{
     padding-top: 10px;

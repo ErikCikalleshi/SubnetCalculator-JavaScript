@@ -296,7 +296,11 @@ function binarySubnetMask() {
     var y = document.getElementById("subnetMask").options;
     var split = y[x].text.split(".");
     split = toBinary(split, 4);
-
+    for (var i = 0; i < split.length; i++) {
+        for (var j = split[i].length; j < 8; j++) {
+            split[i] = "0" + split[i];
+        }
+    }
     document.getElementById("binarySubnet").value = split.join(".");
 }
 
@@ -304,8 +308,11 @@ function binaryIp() {
     var ip = document.getElementById("ipBtn").value;
     var split = ip.split(".");
     split = toBinary(split, 4);
-    var temp = 0;
-
+    for (var i = 0; i < split.length; i++) {
+        for (var j = split[i].length; j < 8; j++) {
+            split[i] = "0" + split[i];
+        }
+    }
     document.getElementById("binaryIP").value = split.join(".");
 }
 
