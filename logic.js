@@ -23,7 +23,6 @@ function selectIf(i) {
 }
 
 function jValue(type, i) {
-
     switch (type) {
         case "a":
             if (i === 0) {
@@ -40,7 +39,6 @@ function jValue(type, i) {
         case "b":
             if (i === 0) {
                 return [8, maskOption.length]
-
             } else if (i === 1) {
                 return [0, 15];
             } else if (i === 2) {
@@ -64,23 +62,25 @@ function jValue(type, i) {
             }
     }
 }
-
+//load the global arrays based on the selected Classes
 function dropdownLoads(type) {
     var select;
     var allArrays = [maskOption, subnetBitsOption, maskBitsOption, hostPer, maxSubnetsOption];
     for (var i = 0; i < 5; i++) {
-        select = selectIf(i);
-        var x = jValue(type, i);
-        for (var j = x[0]; j < x[1]; j++) {
+        select = selectIf(i); //get the selction type
+        var x = jValue(type, i); //load from type the index x to y
+        for (var j = x[0]; j < x[1]; j++) { // add in the selection tag the options
             option[j] = document.createElement('option');
             option[j].value = j;
             option[j].innerHTML = allArrays[i][j];
             select.appendChild(option[j]);
         }
-
     }
 }
 
+/**
+ * Function removes all the options from the select
+ */
 function clear() {
     var select;
     for (var i = 0; i < 5; i++) {
@@ -153,7 +153,8 @@ function hostRange() {
     document.getElementById("hostRange").value = part1 + " - " + part2;
 }
 
-function checkIP(type, key) {
+function LoadFields(type, key) {
+    //if key is null means that we have to preload the "IP Address" TextField
     if (key === null) {
         if (type === 0) {
             return "10.0.0.1";
@@ -169,16 +170,14 @@ function checkIP(type, key) {
         var temp;
         for (var i = 0; i < 3; i++) {
             if (type === i) {
-                if (split[0] < array[i * 2]) {
+               if (split[0] < array[i * 2]) {
                     temp = parseInt(split[0], 10) + 1;
                     split[0] = temp.toString();
-
                 } else if (split[0] > array[(i * 2) + 1]) {
                     temp = parseInt(split[0], 10) - 1;
                     split[0] = temp.toString();
                 }
                 return document.getElementById("ipBtn").value = split.join(".");
-
             }
         }
 
@@ -316,10 +315,15 @@ function binaryIp() {
     document.getElementById("binaryIP").value = split.join(".");
 }
 
-function load(t, key) {
-    //var i = [];
-    networkClass = t;
+/**
+ * This function loads and creates all the necessary Fields based on the Subnet-Class
+ * @param type is the type of the selected Subnet-Class
+ * @param key is a Variable that checks if
+ */
+function load(type, key) {
+    networkClass = type;
     var i = 0;
+    //create the necessary Fields
     for (var j = 24; j > 1; j--) {
         hostPer[i] = Math.pow(2, j) - 2;
         i++;
@@ -331,44 +335,26 @@ function load(t, key) {
     for (var j = 8; j < 31; j++) {
         maskBitsOption[j - 8] = j;
     }
-    for (var j = 2; j < 25; j++) {
-
-    }
-
+    //before loading clear the input Fields
     clear();
-    switch (t) {
+    switch (networkClass) {
+        //Class A
         case 0:
-
-            document.getElementById("ipBtn").value = checkIP(t, key);
+            document.getElementById("ipBtn").value = LoadFields(networkClass, key);
             document.getElementById("octetRange").value = "1 - 126";
-            /*for (var j = 0; j < 5; j++) {
-                i[j] = 0;
-            }*/
             dropdownLoads("a");
             break;
         case 1:
-            document.getElementById("ipBtn").value = checkIP(t, key);
+            document.getElementById("ipBtn").value = LoadFields(networkClass, key);
             document.getElementById("octetRange").value = "128 - 191";
-
             dropdownLoads("b");
             break;
         case 2:
-            document.getElementById("ipBtn").value = checkIP(t, key);
+            document.getElementById("ipBtn").value = LoadFields(networkClass, key);
             document.getElementById("octetRange").value = "192 - 223";
             dropdownLoads("c");
             break;
-        case 3:
-            document.getElementById("ipBtn").value = checkIP(t, key);
-            //i[0] = 24;
-            break;
-        case 4:
-            document.getElementById("ipBtn").value = "172.16.0.1";
-            i = 0;
-            break;
-        case 5:
-            document.getElementById("ipBtn").value = "172.16.0.1";
-            i = 0;
-            break;
+
     }
     decToHex();
     wildCardMask();

@@ -2,47 +2,7 @@ body, html {
     height: 100%;
     scroll-behavior: smooth;
 }
-.head-banner {
-    background-image: url(https://i.redd.it/52f61nfzmwl51.jpg);
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-}
-.info-box{
-    background-color: #ffcb6b;
-}
-.table td{
-    text-align: center;
-}
-.table td.right{
-    text-align: right;
-}
-.headerTable{
-    text-align: center;
-}
-
-#frstContainer{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    box-shadow:  5px 6px 4px #e5e5e5;
-}
-.info-box > div{
-    margin-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-
-.info-box > h3{
-    margin-left: 10px;
-}
-.box{
-    padding-left: 10px;
-    padding-top: 5px;
-    border: solid black 2px;
-}
+/******************** first Header ************************/
 #navbar{
     height: 50px;
     position: fixed;
@@ -50,11 +10,6 @@ body, html {
     top: 0;
     width: 100%;
 }
-
-.tac{
-    position: center;
-}
-
 h1.title {
     font-size: 5rem;
     height: 600px;
@@ -63,28 +18,16 @@ h1.title {
     vertical-align: center;
     text-shadow: 0 5px 15px black;
 }
-
-.btn-secondary {
-    margin: 5px 0;
-    background-color: gray;
-}
-
-.empty{
-    height: 50px;
-}
-table{
-    table-layout: fixed;
-    width: 1000px;
-    vertical-align: middle;
-}
-td,tr {
-    margin: 5px;
-    padding: 2.5px;
-
+.head-banner {
+    background-image: url(images/52f61nfzmwl51.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .arrow-down{
-    height: 900px;
-    line-height: 900px;
+    height: 100%;
+    line-height: 100%;
     text-align: center;
     vertical-align: center;
 }
@@ -94,7 +37,7 @@ td,tr {
     height: 75px;
     position: absolute;
     margin-left: 50%;
-    margin-top: 700px;
+    margin-top: 38%;
     top: 0;
     right: 0;
     bottom: 0;
@@ -112,7 +55,7 @@ td,tr {
     height: 75px;
     position: absolute;
     margin-left: 50%;
-    margin-top: 750px;
+    margin-top: 40%;
     top: 0;
     right: 0;
     bottom: 0;
@@ -124,7 +67,6 @@ td,tr {
     -webkit-animation: 3s arrow infinite ease;
     animation: 3s arrow infinite ease;
 }
-
 @-webkit-keyframes arrow {
     0%, 100%{
         top: 50px;
@@ -141,18 +83,55 @@ td,tr {
         top: 80px;
     }
 }
+.info-box{
+    background-color: #ffcb6b;
+}
+.info-box > div{
+    margin-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.info-box > h3{
+    margin-left: 10px;
+}
+/******************** Subnet-Calculator ************************/
+#frstContainer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow:  5px 6px 4px #e5e5e5;
+}
+.table td{
+    text-align: center;
+}
+.headerTable{
+    text-align: center;
+}
+.table td.right{
+    text-align: right;
+}
+table{
+    table-layout: fixed;
+    width: 1000px;
+    vertical-align: middle;
+}
+td,tr {
+    margin: 5px;
+    padding: 2px;
 
+}
 .custom-select {
     width: 400px;
 }
-
-.mb-3#result {
-    width: auto;
+.btn-secondary {
+    margin: 5px 0;
+    background-color: gray;
+}
+.box{
+    padding-left: 10px;
+    padding-top: 5px;
+    border: solid black 2px;
 }
 
-.mb-3#bitmap {
-    width: auto;
-}
-#bitmap:disabled {
-    background-color: red;
+.empty{
+    height: 50px;
 }

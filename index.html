@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,7 +13,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light light" id="navbar">
     <a class="navbar-brand" href="#">
-        <img src="https://static.thenounproject.com/png/901844-200.png"
+        <img src="images/901844-200.png"
              width="40" height="40" alt="">
     </a>
     <div class="collapse navbar-collapse">
@@ -33,15 +32,12 @@
     <div class="bannerText">
         <h1 class="title">Welcome to the Subnet-Calculator</h1>
     </div>
-
     <div class="arrow-down"></div>
     <div class="arrow-down" id="second"></div>
-
 </header>
 <div class="headContainer" id="fat">
     <div class="empty"></div>
     <div class="container" id="frstContainer">
-
         <table>
             <tr>
                 <td colspan="2"> <h1>Network</h1></td>
@@ -83,7 +79,6 @@
 
                         </select>
                     </div>
-
                 </td>
             </tr>
             <tr>
@@ -133,7 +128,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <div class="input-group mb-3" id="result">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-HostRange">Host Address Range</span>
                         </div>
@@ -238,8 +233,7 @@
             </tr>
         </table>
         <div class="info-box">
-            <div><h3><img src="https://i.pinimg.com/474x/58/7c/3f/587c3f037dafe513d20c8d817a0f534c.jpg" alt=""
-                          width="40" height="40"> Hinweis</h3>
+            <div><h3><img src="images/587c3f037dafe513d20c8d817a0f534c.jpg" alt="" width="40" height="40"> Hinweis</h3>
                 <p>
                     <strong>Subnetzadresse</strong> - Sie lassen sich einsetzen, um Netzwerke zu strukturieren, zu
                     segmentieren oder Adressräume einzusparen.
@@ -264,10 +258,7 @@
         <div class="empty"></div>
         <div class="rhs-cont">
             <h1 class="hTag2"><span>Einführung in IP Subnetting</span></h1>
-            <p><b>Subnetting</b> wird dazu verwendet, um große aber auch kleinere pyhsische Netzwerke in logische
-                Teilnetze zu unterteilen. Aber von außen hin, wird das Netz nur als ein ganzes großes wahrgenommen.
-                Durch die rapide Entwicklung des Internets werden die IP-Adressen immer knapper. Das <b>Subnetting</b>
-                löst dieses Problem.</p>
+            <p><b>Subnetting</b> wird dazu verwendet, um große aber auch kleinere physische Netzwerke in logische Teilnetze zu unterteilen. Aber von außen hin wird das Netz nur als ein ganzes großes wahrgenommen. Durch die rapide Entwicklung des Internets werden die IP-Adressen immer knapper. Das Subnetting löst dieses Problem.</p>
             <h3>Gründe für Subnetting</h3>
             <p>Trennen:</p>
             <ul>
@@ -291,18 +282,16 @@
             <p>Das "Internet Protocol" (IPv4) Adresse besteht aus <b>32-Bit</b> sprich <b>4</b> Byte. Diese IP-Adresse
                 wird den Geräten oder Hosts in einem Netzwerk zugewiesen. Um eine bessere Übersicht zu haben werden die
                 Adressen meist in <b>4 Blöcken/ 8-Bit</b> dargestellt.</p>
-            <p>Jede IP-Adresse besteht aus zwei Teile, die durch eine <b>Netzmaske</b> (Network-ID) -und einen <b>Hostteil</b>
+            <p>Jede IP-Adresse besteht aus zwei Teile, die durch eine <b>Netz</b> (Network-ID) -und einen <b>Hostteil</b>
                 (Host ID) getrennt wird. Die von der Netzmaske maskierten Bits (Netzwerkteil) sind bei allen Hosts eines
                 Netzes gleich.</p>
             <p>Zum Beispiel:</p>
-            <div class="tac"><img title="IP Subnetting Tool"
-                                  src="https://www.manageengine.com/products/oputils/images/ip-address-representation.jpg"
-                                  alt="IP Subnetting - ManageEngine OpUtils"></div>
+            <div><img title="IP" src="images/ip-address-representation.jpg" alt=""></div>
             <h2>Netzwerk IP Klasse</h2>
             <p>Für eine bessere Unterteilung von Netzen werden die IP-Adressen in Klassen eingeteilt. Diese Klassen
                 werden als Klasse A, B, C, D und E bezeichnet. Netzwerke der Klasse A können Millionen von Geräten
                 verbinden. Netzwerke der Klasse B und C werden kleiner und kleiner. (Netzwerke der Klasse D und Klasse E
-                werden selten verwendet.). Die Klasse D wird für die Multicasts verwendet und die Klasse E wird für für
+                werden selten verwendet.). Die Klasse D wird für die Multicasts verwendet und die Klasse E wird für
                 zukünftige Zwecke reserviert.</p>
 
             <table class="table">
@@ -354,12 +343,12 @@
             <p>*Jede IP address die mit 127 startet ist eine <strong>Loop back IP</strong> Adresse.</p>
             <h2>Was ist eine Subnetmaske?</h2>
             <p>Eine Subnetzmaske ist ähnlich wie eine IP-Adresse, jedoch wird es nur im privaten Netzwerk verwendet. Zum
-                Beispiel verwender ein Router diese Subnetzmaske, um die Datenpakete an der richtigen Stelle zu leiten.
+                Beispiel verwendet ein Router diese Subnetzmaske, um die Datenpakete an der richtigen Stelle zu leiten.
                 Subnetzmasken werden in Datenpaketen, die das Internet durchqueren, nicht angegeben.</p>
             <p>Für ein Beispiel aus der realen Welt nehmen wir an, dass ein IP-Paket an die IP-Adresse 192.0.2.15
                 adressiert ist. Bei dieser IP-Adresse handelt es sich um ein Netzwerk der Klasse C, daher wird das
                 Netzwerk durch „192.0.2“ (oder, um technisch präzise zu sein, 192.0.2.0/24) identifiziert.
-                Netzwerk-Router leiten das Paket an einen Host in dem mit „192.0.2“ bezeichneten Netzwerk weiter</p>
+                Netzwerk-Router leiten das Paket an einen Host in dem mit „192.0.2“ bezeichneten Netzwerk weiter.</p>
             <h2>Berechnungen</h2>
             <h3>Netzwerkadresse berechnen</h3>
             <p>Um die Netzwerkadresse (Netz-Subnet-ID) zu berechnen, muss die IP-Adresse und die Subnetzmaske in Binär
@@ -403,6 +392,7 @@
     </div>
 </div>
 <script>
+    //options on click
     document.getElementById("option1").addEventListener("click", function () {
         load(0, null);
     });
@@ -412,16 +402,18 @@
     document.getElementById("option3").addEventListener("click", function () {
         load(2, null);
     });
+    //own ip
     document.getElementById("ipBtn").addEventListener("keypress", function (e) {
         if (e.key === 'Enter') {
             var options = document.getElementsByName("options");
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < 3; i++) {
                 if (options[i].checked) {
                     load(i, "Enter");
                 }
             }
         }
     });
+    //selections on Change
     document.getElementById("subnetMask").addEventListener("change", function () {
         changeSettings("subnetMask");
 
@@ -438,23 +430,20 @@
     document.getElementById("maskBits").addEventListener(("change"), function () {
         changeSettings("maskBits");
     });
-
+    //scroll animation
     document.getElementById('second').addEventListener("click", function () {
         window.scroll(100, window.innerHeight);
     });
 
-    var radr;
     document.onreadystatechange = function (){
         if (document.readyState === 'interactive') {
             fetch('https://api.ipify.org')
                 .then(response => response.text())
                 .then((response) => {
-                    document.getElementById('publicIp').innerHTML = "Your public IP is : " + response;
+                    document.getElementById('publicIp').innerHTML = "Your public IP is: " + response;
                 })
-
         }
     }
-
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
